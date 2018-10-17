@@ -120,6 +120,8 @@ nnoremap <Leader>gdh :Gdiff HEAD<CR>
 noremap <Space> i
 nnoremap zj 10<C-y>
 nnoremap zk 10<C-e>
+
+vnoremap <Leader>@ :norm @q<CR>
 " }}}
 
 " *keychords* {{{1
