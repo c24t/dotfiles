@@ -1,0 +1,9 @@
+[user]
+	email = git@c24t.org
+	name = Chris Kleinknecht
+[alias]
+	b = branch
+	co = checkout
+	lg = log --abbrev-commit --pretty
+	lgo = log --abbrev-commit --pretty=oneline
+	st = status
