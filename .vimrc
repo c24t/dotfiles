@@ -78,6 +78,9 @@ endif
 let g:CommandTMaxHeight=20
 let g:CommandTScanDotDirectories=1
 let g:CommandTCancelMap=['<Esc>', '<C-c>']
+let g:CommandTFileScanner='git'
+let g:CommandTGitScanSubmodules=1
+let g:CommandTGitIncludeUntracked=1
 " }}}
 
 " *Tagbar* {{{2
@@ -112,10 +115,12 @@ nnoremap <leader><leader><tab> :tabedit %<CR>
 nnoremap <leader><tab> :tabprevious<CR>
 nnoremap <silent> <Leader>c :TagbarToggle<CR>
 nnoremap coy :SyntasticToggleMode<CR>
+nnoremap cop ]p
 
 nnoremap <Leader>gdm :Gdiff master<CR>
 nnoremap <Leader>gdd :Gdiff<CR>
 nnoremap <Leader>gdh :Gdiff HEAD<CR>
+nnoremap <Leader>gds :Gdiff stash<CR>
 
 noremap <Space> i
 nnoremap zj 10<C-y>
