@@ -21,6 +21,7 @@ zstyle ':completion:*' original false
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle :compinstall filename '/Users/libc/.zshrc'
 
+fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
