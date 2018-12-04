@@ -99,6 +99,11 @@ let g:syntastic_python_checkers=['flake8']
 let Grep_Find_Use_Xargs = 0         " because MacOS's `xargs` isn't really
 let Grep_Xargs_Options = '--print0' " ...not that it matters
 " }}}
+
+" *ALE* {{{2
+let g:ale_linters = { 'python': ['flake8', 'pylint'], }
+" }}}
+
 " }}}
 
 " *remaps* {{{1
@@ -114,13 +119,17 @@ nnoremap <leader>n :NERDTreeFind<CR>
 nnoremap <leader><leader><tab> :tabedit %<CR>
 nnoremap <leader><tab> :tabprevious<CR>
 nnoremap <silent> <Leader>c :TagbarToggle<CR>
-nnoremap coy :SyntasticToggleMode<CR>
+nnoremap yoa :ALEToggleBuffer<CR>
+nnoremap yoA :ALEToggle<CR>
+nmap coA yoA
+nmap coa yoa
 nnoremap cop ]p
 
 nnoremap <Leader>gdm :Gdiff master<CR>
 nnoremap <Leader>gdd :Gdiff<CR>
 nnoremap <Leader>gdh :Gdiff HEAD<CR>
 nnoremap <Leader>gds :Gdiff stash<CR>
+nnoremap <Leader>gdu :Gdiff upstream/master<CR>
 
 noremap <Space> i
 nnoremap zj 10<C-y>
