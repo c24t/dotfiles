@@ -103,7 +103,6 @@ let Grep_Xargs_Options = '--print0' " ...not that it matters
 " *ALE* {{{2
 let g:ale_linters = { 'python': ['flake8', 'pylint'], }
 " }}}
-
 " }}}
 
 " *remaps* {{{1
@@ -119,11 +118,20 @@ nnoremap <leader>n :NERDTreeFind<CR>
 nnoremap <leader><leader><tab> :tabedit %<CR>
 nnoremap <leader><tab> :tabprevious<CR>
 nnoremap <silent> <Leader>c :TagbarToggle<CR>
+
 nnoremap yoa :ALEToggleBuffer<CR>
 nnoremap yoA :ALEToggle<CR>
 nmap coA yoA
 nmap coa yoa
-nnoremap cop ]p
+" undoing unimpaired maps following the word of god
+" https://github.com/tpope/vim-unimpaired/issues/154
+" https://github.com/tpope/vim-unimpaired/issues/145
+let g:nremap = {"[yy": "", "]yy": "", "[y": "", "]y": ""}
+let g:xremap = {"[yy": "", "]yy": "", "[y": "", "]y": ""}
+" TODO: get ale plug mappings to accept a count
+" see http://vimcasts.org/episodes/creating-mappings-that-accept-a-count/
+nmap <silent> ]y <Plug>(ale_next)
+nmap <silent> [r <Plug>(ale_previous)
 
 nnoremap <Leader>gdm :Gdiff master<CR>
 nnoremap <Leader>gdd :Gdiff<CR>
