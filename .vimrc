@@ -102,6 +102,7 @@ let Grep_Xargs_Options = '--print0' " ...not that it matters
 
 " *ALE* {{{2
 let g:ale_linters = { 'python': ['flake8', 'pylint'], }
+let g:ale_pattern_options = {'_pb2\(_grpc\)\?\.py$': {'ale_enabled': 0}}
 " }}}
 " }}}
 
