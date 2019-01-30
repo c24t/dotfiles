@@ -58,7 +58,12 @@ set cmdwinheight=20
 
 set diffopt+=vertical
 
+set switchbuf= " keep focus in same window on e.g. :lnext
+
 set tags=./tags,tags " look in the dir of the open file, then in pwd
+
+set ts=4 " preferred ts/sw for text files
+set sw=4
 " }}}
 
 highlight SpellBad ctermbg=52
@@ -101,6 +106,7 @@ let Grep_Xargs_Options = '--print0' " ...not that it matters
 " }}}
 
 " *ALE* {{{2
+let g:ale_set_loclist = 0
 let g:ale_linters = { 'python': ['flake8', 'pylint'], }
 let g:ale_pattern_options = {'_pb2\(_grpc\)\?\.py$': {'ale_enabled': 0}}
 " }}}
@@ -152,7 +158,6 @@ call arpeggio#load()
 let s:UserArpeggioRemaps="$HOME/.vim/arpeggio_remaps.vim"
 execute 'source'.expand(s:UserArpeggioRemaps)
 " }}}
-
 
 " vim:foldmethod=marker
 " vim:noet:sw=2:ts=2
