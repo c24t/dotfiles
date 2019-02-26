@@ -110,6 +110,11 @@ let g:ale_set_loclist = 0
 let g:ale_linters = { 'python': ['flake8', 'pylint'], }
 let g:ale_pattern_options = {'_pb2\(_grpc\)\?\.py$': {'ale_enabled': 0}}
 " }}}
+
+" *YouCompleteMe* {{{2
+  let g:ycm_auto_trigger = 0
+  let g:ycm_filetype_specific_completion_to_disable = {'gitcommit': 1}
+" }}}
 " }}}
 
 " *remaps* {{{1
