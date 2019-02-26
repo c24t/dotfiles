@@ -124,12 +124,17 @@ let g:mapleader = '\'
 
 nnoremap <silent> <Leader>t :CommandT<CR>
 nnoremap <silent> <Leader><Leader>t :CommandTTag<CR>
-nnoremap <silent> <Leader>b :CommandTBuffer<CR>
+nnoremap <silent> <Leader>b :CommandTMRU<CR>
+nnoremap <Leader>cc :CommandTCommand<CR>
+nnoremap <Leader>cl :CommandTLine<CR>
+nnoremap <Leader>ch :CommandTHistory<CR>
+nnoremap <Leader>c? :CommandTHelp<CR>
+nnoremap <Leader>cj :CommandTJump<CR>
+nnoremap <Leader>c/ :CommandTSearch<CR>
 nnoremap <Leader>u :GundoToggle<CR>
 nnoremap <leader>n :NERDTreeFind<CR>
 nnoremap <leader><leader><tab> :tabedit %<CR>
 nnoremap <leader><tab> :tabprevious<CR>
-nnoremap <silent> <Leader>c :TagbarToggle<CR>
 
 nnoremap yoa :ALEToggleBuffer<CR>
 nnoremap yoA :ALEToggle<CR>
