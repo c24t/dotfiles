@@ -23,8 +23,13 @@ alias tt="tmx2 attach -t"
 # findfile, findfilefollow
 ff () { find . -type f -iname "*$1*" | grep -i "$1" }
 fff () { find . -type f -iname "*$1*" -follow | grep -i "$1"}
+
 fd () { find . -type d -iname "*$1*" | grep -i "$1" }
 fdf () { find . -type d -iname "*$1*" -follow | grep -i "$1"}
+
+# grepall, grepallfollow
+ga () {find . -type f -print0 | xargs -0 egrep "$1" | echo "balls"}
+gaa () {find . -type f -follow -print0 | xargs -0 egrep "$1"}
 
 # grepall select by suffix
 gas () {find . -type f -name "*.$2" -print0 | xargs -0 egrep -n "$1" --color=auto}
@@ -49,6 +54,9 @@ alias gbhh="git rev-parse --short HEAD\^"
 alias gbhhh="git rev-parse --short HEAD\^\^"
 alias stash="git stash"
 alias glg="git lg"
+alias glgg="git lgg"
+alias glggg="git lggg"
+alias glgo="git lgo"
 alias gbn="git symbolic-ref HEAD --short"
 alias gg="git grep"
 
@@ -61,4 +69,26 @@ pytags () {
 	/usr/local/brew/opt/findutils/libexec/gnubin/find -L . -type f -name "*.py" | gv -E -f .tagignore | xargs ctags -R --languages=python --python-kinds=cfm
 }
 
-# vim:ft=zsh:noet:sw=2 ts=2
+shruggie () {
+	echo '¯\_(ツ)_/¯' | tee pbcopy
+}
+
+flippie () {
+	echo '(╯°□°)╯︵ ┻━┻' | tee pbcopy
+}
+
+mb () {
+	if [ -n "$2" ]; then
+		git rev-parse --short $(git merge-base $1 $2)
+	elif [ -n "$1" ]; then
+		git rev-parse --short $(git merge-base $1 HEAD)
+	else
+		git rev-parse --short $(git merge-base master HEAD)
+	fi
+}
+# zsh ships with nice git completions, see
+# /usr/share/zsh/5.3/functions/_git
+compdef _git-checkout mb
+
+
+# vim: set ft=zsh:sw=2 ts=2:noet:
