@@ -52,6 +52,7 @@ set wildmode=longest:full               " prefix matching for wildmenu
 set completeopt+=longest                " insert up to the matched prefix
 set wildignore+=*.class,*.o,*.pyc,*.git " unlikely to want to match these
 set wildignore+=*/node_modules/*        " fucking node
+set wildignore+=*/__pycache__/
 
 set history=10000
 set cmdwinheight=20
@@ -93,6 +94,7 @@ let g:tagbar_left = 1
 " }}}
 
 " *NERDTree* " {{{2
+let g:NERDTreeIgnore=['__pycache__']
 let g:NERDTreeRespectWildIgnore = 1
 " }}}
 
