@@ -60,6 +60,19 @@ alias glgo="git lgo"
 alias gbn="git symbolic-ref HEAD --short"
 alias gg="git grep"
 
+glast () {
+	git rev-parse --abbrev-ref '@{-1}'
+	git rev-parse --abbrev-ref '@{-2}'
+	git rev-parse --abbrev-ref '@{-3}'
+	git rev-parse --abbrev-ref '@{-4}'
+	git rev-parse --abbrev-ref '@{-5}'
+}
+
+# quick git checkout -- check out a recent branch
+cco () {
+	git checkout $1
+}
+
 # archeology
 hf () {
 	< $HISTFILE | grep -i $1 | cut -d ';' -f 2- | ~/script/uniq.py | grep -i --color=auto $1
@@ -86,9 +99,5 @@ mb () {
 		git rev-parse --short $(git merge-base master HEAD)
 	fi
 }
-# zsh ships with nice git completions, see
-# /usr/share/zsh/5.3/functions/_git
-compdef _git-checkout mb
-
 
 # vim: set ft=zsh:sw=2 ts=2:noet:
