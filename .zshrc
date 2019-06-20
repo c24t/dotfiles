@@ -56,13 +56,11 @@ ZSHRC=$HOME/.zshrc
 export ALIASES=$HOME/.aliases
 export AUTO_ALIASES=$ALIASES/auto
 
-# source ~/.aliases/**/*
-for file in $(find $ALIASES -follow); do source $file; done
-
 # edit this file and source it
 alias vizsh="vim $ZSHRC && source $ZSHRC"
 
 # add an alias
+# ALIASES/AUTO_ALIASES are defined in .zshenv
 aaa () {
 	echo "alias $1=\"$2\"" >> $AUTO_ALIASES
 	source $AUTO_ALIASES
@@ -76,6 +74,27 @@ vialiases () {
 	)
 	for file in $(find $ALIASES -follow); do source $file; done
 }
+
+# alias completions   {{{2
+# can't put these in .aliases since we might not have completion while sourcing
+# it from .zshenv
+function _cco {
+	_values \
+		"cco" $(glast)
+}
+compdef _cco cco
+
+# zsh ships with nice git completions, see
+# /usr/share/zsh/5.3/functions/_git
+compdef _git-checkout mb
+
+# need a better way to do compdef for your own scripts
+function _gmail {
+	_values \
+		"gmail" $(gmail --completions)
+}
+compdef _gmail gmail
+# }}}
 # }}}
 
 # setopts {{{1
