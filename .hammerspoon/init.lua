@@ -34,6 +34,15 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
   win:setFrame(f)
 end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "Right", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+  f.x = max.x + (max.w - f.w)
+  win:setFrame(f)
+end)
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
@@ -43,6 +52,15 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
   f.y = max.y
   f.w = max.w / 2
   f.h = max.h
+  win:setFrame(f)
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "Left", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+  f.x = 0
   win:setFrame(f)
 end)
 
@@ -69,6 +87,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
 end)
 
 -- SCROLL ON MIDDLE-CLICK DRAG
+-- TODO: don't suppress regular middle clicks! gah!
 -- https://github.com/tekezo/Karabiner/issues/814#issuecomment-281422447
 local oldmousepos = {}
 local scrollmult = -2
@@ -83,10 +102,17 @@ mousetap = hs.eventtap.new({0,3,5,14,25,26,27}, function(e)
 		local pressedMouseButton = e:getProperty(hs.eventtap.event.properties['mouseEventButtonNumber'])
 		local dx = e:getProperty(hs.eventtap.event.properties['mouseEventDeltaX'])
 		local dy = e:getProperty(hs.eventtap.event.properties['mouseEventDeltaY'])
-		local scroll = hs.eventtap.event.newScrollEvent({dx * scrollmult, dy * scrollmult},{},'pixel')
-		scroll:post()
-		hs.mouse.setAbsolutePosition(oldmousepos)
-		return true, {scroll}
+		--https://www.hammerspoon.org/docs/hs.eventtap.html#middleClick
+		--https://www.hammerspoon.org/docs/hs.eventtap.event.html
+		-- if dx == 0 and dy == 0 then
+		-- 	hs.eventtap.middleClick(oldmousepos)
+		-- 	return false, {}
+		-- else
+			local scroll = hs.eventtap.event.newScrollEvent({dx * scrollmult, dy * scrollmult},{},'pixel')
+			scroll:post()
+			hs.mouse.setAbsolutePosition(oldmousepos)
+			return true, {scroll}
+		-- end
 	else
 		return false, {}
 	end
