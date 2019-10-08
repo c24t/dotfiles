@@ -60,14 +60,6 @@ alias glgo="git lgo"
 alias gbn="git symbolic-ref HEAD --short"
 alias gg="git grep"
 
-glast () {
-	git rev-parse --abbrev-ref '@{-1}'
-	git rev-parse --abbrev-ref '@{-2}'
-	git rev-parse --abbrev-ref '@{-3}'
-	git rev-parse --abbrev-ref '@{-4}'
-	git rev-parse --abbrev-ref '@{-5}'
-}
-
 # quick git checkout -- check out a recent branch
 cco () {
 	git checkout $1
@@ -98,6 +90,24 @@ mb () {
 	else
 		git rev-parse --short $(git merge-base master HEAD)
 	fi
+}
+
+switchmaster() {
+	git co master &&\
+	git pull upstream master &&\
+}
+
+steamrollmaster() {
+	git co master &&\
+	git fetch upstream &&\
+	git reset --hard 'upstream/master' &&\
+	git rebase upstream/master
+}
+
+mergemaster() {
+	switchmaster
+	git co - &&\
+	git merge master
 }
 
 # vim: set ft=zsh:sw=2 ts=2:noet:
