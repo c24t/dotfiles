@@ -114,8 +114,12 @@ let g:ale_pattern_options = {'_pb2\(_grpc\)\?\.py$': {'ale_enabled': 0}}
 " }}}
 
 " *YouCompleteMe* {{{2
-  let g:ycm_auto_trigger = 0
-  let g:ycm_filetype_specific_completion_to_disable = {'gitcommit': 1}
+let g:ycm_auto_trigger = 0
+let g:ycm_filetype_specific_completion_to_disable = {'gitcommit': 1}
+" }}}
+
+" *Black* {{{2
+let g:black_linelength = 79
 " }}}
 " }}}
 
@@ -124,8 +128,12 @@ let g:ale_pattern_options = {'_pb2\(_grpc\)\?\.py$': {'ale_enabled': 0}}
 let mapleader = '\'
 let g:mapleader = '\'
 
+" https://vim.fandom.com/wiki/Selecting_your_pasted_text
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
 nnoremap <silent> <Leader>t :CommandT<CR>
-nnoremap <silent> <Leader><Leader>t :CommandTTag<CR>
+" Trying out FZF instead
+" nnoremap <silent> <Leader><Leader>t :CommandTTag<CR>
 nnoremap <silent> <Leader>b :CommandTMRU<CR>
 nnoremap <Leader>cc :CommandTCommand<CR>
 nnoremap <Leader>cl :CommandTLine<CR>
@@ -137,6 +145,8 @@ nnoremap <Leader>u :GundoToggle<CR>
 nnoremap <leader>n :NERDTreeFind<CR>
 nnoremap <leader><leader><tab> :tabedit %<CR>
 nnoremap <leader><tab> :tabprevious<CR>
+
+nnoremap <leader>s :sp ~/.vim/snips/python.snippets<CR>
 
 nnoremap yoa :ALEToggleBuffer<CR>
 nnoremap yoA :ALEToggle<CR>
@@ -163,6 +173,23 @@ nnoremap zj 10<C-y>
 nnoremap zk 10<C-e>
 
 vnoremap <Leader>@ :norm @q<CR>
+
+" *fzf remaps* {{{2
+" Cribbed from https://github.com/junegunn/fzf.vim
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+	\ call fzf#vim#grep(
+	\   'git grep --line-number '.shellescape(<q-args>), 0,
+	\   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+nmap <leader>ff :FZFGgrep<CR>
+nmap <leader>fa :Ag<CR>
+nmap <leader>fb :Lines<CR>
+" Let's see if it's better than command-T
+nmap <leader><leader>t :Tags<CR>
+nmap <leader>fc :BCommits<CR>
+nmap <leader>fh <plug>(fzf-maps-n)
+" }}}
 " }}}
 
 " *keychords* {{{1
