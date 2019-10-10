@@ -5,6 +5,9 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
+" https://github.com/junegunn/fzf.vim/issues/60#issuecomment-168103057
+execute 'set rtp+='.fnamemodify(systemlist('greadlink -f $(which fzf)')[0], ':h:h')
+
 " *options* {{{1
 set t_Co=256
 colorscheme wombat256mod
@@ -179,9 +182,9 @@ vnoremap <Leader>@ :norm @q<CR>
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
 command! -bang -nargs=* GGrep
-	\ call fzf#vim#grep(
-	\   'git grep --line-number '.shellescape(<q-args>), 0,
-	\   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 nmap <leader>ff :FZFGgrep<CR>
 nmap <leader>fa :Ag<CR>
 nmap <leader>fb :Lines<CR>
