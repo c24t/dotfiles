@@ -134,8 +134,8 @@ let g:mapleader = '\'
 " https://vim.fandom.com/wiki/Selecting_your_pasted_text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
-nnoremap <silent> <Leader>t :CommandT<CR>
 " Trying out FZF instead
+" nnoremap <silent> <Leader>t :CommandT<CR>
 " nnoremap <silent> <Leader><Leader>t :CommandTTag<CR>
 nnoremap <silent> <Leader>b :CommandTMRU<CR>
 nnoremap <Leader>cc :CommandTCommand<CR>
@@ -181,11 +181,12 @@ vnoremap <Leader>@ :norm @q<CR>
 " Cribbed from https://github.com/junegunn/fzf.vim
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
-command! -bang -nargs=* GGrep
+command! -bang -nargs=* FZFGgrep
   \ call fzf#vim#grep(
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 nmap <leader>ff :FZFGgrep<CR>
+nnoremap <silent> <Leader>t :Files<CR>
 nmap <leader>fa :Ag<CR>
 nmap <leader>fb :Lines<CR>
 " Let's see if it's better than command-T
