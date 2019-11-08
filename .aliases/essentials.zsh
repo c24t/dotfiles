@@ -12,6 +12,7 @@ alias pul=pull
 alias push="git push"
 
 # dates
+alias longdate="date '+%F (%a %b %d)'"
 alias longstardate="date +%Y%m.%d.%H%M"
 alias shortdate="date +%d%b"
 alias epoch="date +%s"
@@ -38,7 +39,7 @@ gaas () {find . -type f -follow -name "*.$2" -print0 | xargs -0 egrep -n "$1" --
 # `ps aux` cut -- get the pid
 psac () {awk '{print $2}'}
 
-mcd () { mkdir -p $1 && cd $1 }
+cdm () { mkdir -p $1 && cd $1 }
 
 # dir stack management
 alias d="dirs -lp"
