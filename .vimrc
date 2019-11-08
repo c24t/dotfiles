@@ -168,8 +168,13 @@ nmap <silent> [r <Plug>(ale_previous)
 nnoremap <Leader>gdm :Gdiff master<CR>
 nnoremap <Leader>gdd :Gdiff<CR>
 nnoremap <Leader>gdh :Gdiff HEAD<CR>
+nnoremap <Leader>gd1h :Gdiff HEAD^<CR>
+nnoremap <Leader>gd2h :Gdiff HEAD^^<CR>
+nnoremap <Leader>gd3h :Gdiff HEAD^^^<CR>
 nnoremap <Leader>gds :Gdiff stash<CR>
 nnoremap <Leader>gdu :Gdiff upstream/master<CR>
+
+nnoremap <Leader>gb :Black<CR>
 
 noremap <Space> i
 nnoremap zj 10<C-y>
@@ -188,11 +193,15 @@ command! -bang -nargs=* FZFGgrep
 nmap <leader>ff :FZFGgrep<CR>
 nnoremap <silent> <Leader>t :Files<CR>
 nmap <leader>fa :Ag<CR>
-nmap <leader>fb :Lines<CR>
+nmap <leader>fi :Lines<CR>
+nmap <leader>fl :BLines<CR>
+nmap <leader>ft :BTags<CR>
 " Let's see if it's better than command-T
 nmap <leader><leader>t :Tags<CR>
-nmap <leader>fc :BCommits<CR>
+nmap <leader>fb :BCommits<CR>
+nmap <leader>fc :Commits<CR>
 nmap <leader>fh <plug>(fzf-maps-n)
+nmap <leader>x :Isort<CR>:Black<CR>
 " }}}
 " }}}
 
