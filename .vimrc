@@ -112,13 +112,20 @@ let Grep_Xargs_Options = '--print0' " ...not that it matters
 
 " *ALE* {{{2
 let g:ale_set_loclist = 0
-let g:ale_linters = { 'python': ['flake8', 'pylint'], }
+
+"TODO: per-project lint settings
 let g:ale_pattern_options = {'_pb2\(_grpc\)\?\.py$': {'ale_enabled': 0}}
+let g:ale_linters = { 'python': ['black'], }
+" let g:ale_linters = { 'python': ['flake8', 'pylint'], }
+" let g:ale_linters = { 'python': [] }
+
 " }}}
 
 " *YouCompleteMe* {{{2
 let g:ycm_auto_trigger = 0
 let g:ycm_filetype_specific_completion_to_disable = {'gitcommit': 1}
+" ...you're gonna need it
+" let g:ycm_log_level = 'debug'
 " }}}
 
 " *Black* {{{2
@@ -195,11 +202,13 @@ nnoremap <silent> <Leader>t :Files<CR>
 nmap <leader>fa :Ag<CR>
 nmap <leader>fi :Lines<CR>
 nmap <leader>fl :BLines<CR>
+" (f)ind (t)ag in buffer
 nmap <leader>ft :BTags<CR>
 " Let's see if it's better than command-T
 nmap <leader><leader>t :Tags<CR>
 nmap <leader>fb :BCommits<CR>
 nmap <leader>fc :Commits<CR>
+" fzf help
 nmap <leader>fh <plug>(fzf-maps-n)
 nmap <leader>x :Isort<CR>:Black<CR>
 " }}}
