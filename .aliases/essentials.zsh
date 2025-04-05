@@ -29,7 +29,7 @@ fd () { find . -type d -iname "*$1*" | grep -i "$1" }
 fdf () { find . -type d -iname "*$1*" -follow | grep -i "$1"}
 
 # grepall, grepallfollow
-ga () {find . -type f -print0 | xargs -0 egrep "$1" | echo "balls"}
+ga () {find . -type f -print0 | xargs -0 egrep "$1"}
 gaa () {find . -type f -follow -print0 | xargs -0 egrep "$1"}
 
 # grepall select by suffix

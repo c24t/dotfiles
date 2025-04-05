@@ -8,6 +8,10 @@ filetype plugin indent on
 " https://github.com/junegunn/fzf.vim/issues/60#issuecomment-168103057
 execute 'set rtp+='.fnamemodify(systemlist('greadlink -f $(which fzf)')[0], ':h:h')
 
+" *built-in vim packages* {{{1
+packadd! matchit
+" }}}
+
 " *options* {{{1
 set t_Co=256
 colorscheme wombat256mod
@@ -66,8 +70,9 @@ set switchbuf= " keep focus in same window on e.g. :lnext
 
 set tags=./tags,tags " look in the dir of the open file, then in pwd
 
-set ts=4 " preferred ts/sw for text files
-set sw=4
+set et
+set ts=2 " preferred ts/sw for text files
+set sw=2
 " }}}
 
 highlight SpellBad ctermbg=52
@@ -173,7 +178,7 @@ nmap <silent> ]y <Plug>(ale_next)
 nmap <silent> [r <Plug>(ale_previous)
 
 nnoremap <Leader>gdm :Gdiff master<CR>
-nnoremap <Leader>gdd :Gdiff<CR>
+nnoremap <Leader>gdd :Gvsplit<CR>
 nnoremap <Leader>gdh :Gdiff HEAD<CR>
 nnoremap <Leader>gd1h :Gdiff HEAD^<CR>
 nnoremap <Leader>gd2h :Gdiff HEAD^^<CR>
@@ -198,8 +203,12 @@ command! -bang -nargs=* FZFGgrep
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 nmap <leader>ff :FZFGgrep<CR>
-nnoremap <silent> <Leader>t :Files<CR>
 nmap <leader>fa :Ag<CR>
+
+nnoremap <silent> <Leader>t :Files<CR>
+nnoremap <silent> <Leader>b :Buffers<CR>
+nmap <leader><leader>t :Tags<CR>
+
 nmap <leader>fi :Lines<CR>
 nmap <leader>fl :BLines<CR>
 " (f)ind (t)ag in buffer

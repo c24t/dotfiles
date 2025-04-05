@@ -1,5 +1,3 @@
-# export ALIASES=$HOME/.aliases
-# export AUTO_ALIASES=$ALIASES/auto
+export ALIASES=$HOME/.aliases
 
-# source ~/.aliases/**/*
-for file in $(find $HOME/.aliases -follow); do source $file; done
+for file in $(find $ALIASES -follow); do source $file; done

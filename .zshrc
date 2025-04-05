@@ -74,6 +74,7 @@ vialiases () {
 	)
 	for file in $(find $ALIASES -follow); do source $file; done
 }
+for file in $(find $ALIASES -follow); do source $file; done
 
 # alias completions   {{{2
 # can't put these in .aliases since we might not have completion while sourcing
@@ -88,12 +89,6 @@ compdef _cco cco
 # /usr/share/zsh/5.3/functions/_git
 compdef _git-checkout mb
 
-# need a better way to do compdef for your own scripts
-function _gmail {
-	_values \
-		"gmail" $(gmail --completions)
-}
-compdef _gmail gmail
 # }}}
 # }}}
 
@@ -128,7 +123,8 @@ export CLICOLOR=1
 # }}}
 
 # path munging {{{1
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin/:$PATH"
+export PATH="$HOME/script/bin/:$PATH"
 # }}}
 
 # plugins {{{{1
@@ -136,6 +132,20 @@ source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 # }}}
+
+# added by fzf installer
+# put it before bindkeys to remap ^T
+# export FZF_TMUX_OPTS="-p -h 92% -w 92%"
+export FZF_TMUX_OPTS=""
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_DEFAULT_OPTS='--height 40 --min-height 20 --layout=reverse'
+# makes C_r laggy?
+# https://github.com/junegunn/fzf/issues/937#issuecomment-310254682
+export FZF_TMUX=0
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window hidden:wrap --bind '?:toggle-preview'"
+export FZF_CTRL_R_OPTS=""
+export FZF_CTRL_T_OPTS='--preview "head -40 {}"'
 
 # bindkeys {{{1
 bindkey -M viins '^?' backward-delete-char
@@ -159,8 +169,8 @@ bindkey '^E' autosuggest-accept
 # :nmap <Space> i
 bindkey -M vicmd ' ' vi-insert
 
-bindkey "^R" history-incremental-search-backward
 bindkey "^T" push-line-or-edit
+bindkey '^F' fzf-file-widget
 # }}}
 
 # source os/machine/company-specific files
